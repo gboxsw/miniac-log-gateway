@@ -6,6 +6,11 @@ package com.gboxsw.miniac.gateways.log;
 public class LogRecord {
 
 	/**
+	 * System time when the log was received by the gateway.
+	 */
+	private final long time;
+
+	/**
 	 * The type of log.
 	 */
 	private final String type;
@@ -26,6 +31,7 @@ public class LogRecord {
 	public LogRecord(String type, String message) {
 		this.type = type;
 		this.message = message;
+		this.time = System.currentTimeMillis();
 	}
 
 	/**
@@ -44,5 +50,15 @@ public class LogRecord {
 	 */
 	public String getMessage() {
 		return message;
+	}
+
+	/**
+	 * Returns the unix timestamp of time when the message was received by the
+	 * gateway.
+	 * 
+	 * @return the unix timestamp.
+	 */
+	public long getTime() {
+		return time;
 	}
 }

@@ -16,6 +16,28 @@ public class LoggingConfiguration {
 	private int writePeriodInSeconds = 60;
 
 	/**
+	 * Constructs the logging configuration.
+	 * 
+	 * @param maxUnwrittenLogs
+	 *            the value for
+	 *            {@link LoggingConfiguration#setMaxUnwrittenLogs(int)}.
+	 * @param writePeriodInSeconds
+	 *            the value for
+	 *            {@link LoggingConfiguration#setWritePeriodInSeconds(int)}.
+	 */
+	public LoggingConfiguration(int maxUnwrittenLogs, int writePeriodInSeconds) {
+		setMaxUnwrittenLogs(maxUnwrittenLogs);
+		setWritePeriodInSeconds(writePeriodInSeconds);
+	}
+
+	/**
+	 * Constructs the logging configuration with default values.
+	 */
+	public LoggingConfiguration() {
+
+	}
+
+	/**
 	 * Returns the maximal number of unwritten logs.
 	 * 
 	 * @return the maximal number of unwritten logs.

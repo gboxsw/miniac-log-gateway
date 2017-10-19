@@ -1,6 +1,10 @@
 package com.gboxsw.miniac.gateways.log.writers;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import com.gboxsw.miniac.gateways.log.*;
 
 /**
@@ -12,6 +16,11 @@ public class FileLogWriter implements LogWriter {
 	 * Output file.
 	 */
 	private final File outputFile;
+
+	/**
+	 * Date-time formatter.
+	 */
+	private final SimpleDateFormat dtFormat;
 
 	/**
 	 * Constructs the file logger.
@@ -26,6 +35,8 @@ public class FileLogWriter implements LogWriter {
 		}
 
 		this.outputFile = outputFile;
+		dtFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		dtFormat.setTimeZone(TimeZone.getDefault());
 	}
 
 	@Override
@@ -59,7 +70,8 @@ public class FileLogWriter implements LogWriter {
 					message = message.replace('\n', ' ');
 				}
 
-				pw.println(type + "\t" + message);
+				String dateTime = dtFormat.format(new Date(record.getTime()));
+				pw.println(dateTime + "\t" + type + "\t" + message);
 				record = null;
 			}
 		} catch (Exception e) {
@@ -68,7 +80,7 @@ public class FileLogWriter implements LogWriter {
 			}
 
 			throw new RuntimeException("Writing to file " + outputFile.getAbsolutePath() + " failed.", e);
-		}	
+		}
 	}
 
 	@Override
